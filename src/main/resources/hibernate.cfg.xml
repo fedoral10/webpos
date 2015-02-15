@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		
+<hibernate-configuration>
+    <session-factory name="PostgreSQL">
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">123</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/test</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="use_sql_comments">true</property>
+		
+		<!-- <mapping class="com.datos.entidades.ArticuloClasificacionPK.java"/> -->
+		<!-- <mapping class="com.datos.entidades.DetalleCierreCajaPK.java"/> -->
+		<!-- <mapping class="com.datos.entidades.ExistenciaBodegaPK.java"/> -->
+		
+		
+		<mapping class="com.datos.entidades.Cliente"/>
+		<mapping class="com.datos.entidades.Factura"/>
+		<mapping class="com.datos.entidades.FacturaLinea"/>
+		<mapping class="com.datos.entidades.Articulo"/>
+		<mapping class="com.datos.entidades.ArticuloClasificacion"/>
+		<mapping class="com.datos.entidades.Bodega"/>
+		<mapping class="com.datos.entidades.Caja"/>
+		<mapping class="com.datos.entidades.Clasificacion"/>
+		<mapping class="com.datos.entidades.Denominacion"/>
+		<mapping class="com.datos.entidades.DetalleCierreCaja"/>
+		
+		<mapping class="com.datos.entidades.Empleado"/>
+		<mapping class="com.datos.entidades.ExistenciaBodega"/>
+		
+		
+		<mapping class="com.datos.entidades.GastoEspontaneo"/>
+		<mapping class="com.datos.entidades.Proveedor"/>
+		<mapping class="com.datos.entidades.TipoGastoEspontaneo"/>
+        <!-- <mapping class="com.datos.entidades.Client"/> -->
+        
+    </session-factory>
+</hibernate-configuration>

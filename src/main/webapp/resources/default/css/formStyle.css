@@ -1,0 +1,16 @@
+/*.gridBorde tr,  .gridBorde td{
+    border: none;
+}
+border: none;
+border-style: none;
+*/
+h1
+{
+color:orange;
+text-align:center;
+}
+.panelSinGrid tr, .panelSinGrid td {
+    border: none;
+    border-style: hidden;
+    border-color: transparent;
+}

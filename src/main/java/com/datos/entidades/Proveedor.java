@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,8 +27,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PROVEEDOR")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")})
+    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p"),
+    @NamedQuery(name = "Proveedor.findByIdProveedor", query = "SELECT p FROM Proveedor p WHERE p.idProveedor = :idProveedor"),
+    @NamedQuery(name = "Proveedor.findByRazonSocial", query = "SELECT p FROM Proveedor p WHERE p.razonSocial = :razonSocial"),
+    @NamedQuery(name = "Proveedor.findByPrimerNombre", query = "SELECT p FROM Proveedor p WHERE p.primerNombre = :primerNombre"),
+    @NamedQuery(name = "Proveedor.findBySegundoNombre", query = "SELECT p FROM Proveedor p WHERE p.segundoNombre = :segundoNombre"),
+    @NamedQuery(name = "Proveedor.findByPrimerApellido", query = "SELECT p FROM Proveedor p WHERE p.primerApellido = :primerApellido"),
+    @NamedQuery(name = "Proveedor.findBySegundoApellido", query = "SELECT p FROM Proveedor p WHERE p.segundoApellido = :segundoApellido"),
+    @NamedQuery(name = "Proveedor.findByTelefono1", query = "SELECT p FROM Proveedor p WHERE p.telefono1 = :telefono1"),
+    @NamedQuery(name = "Proveedor.findByTelefono2", query = "SELECT p FROM Proveedor p WHERE p.telefono2 = :telefono2"),
+    @NamedQuery(name = "Proveedor.findByDireccion", query = "SELECT p FROM Proveedor p WHERE p.direccion = :direccion"),
+    @NamedQuery(name = "Proveedor.findByEmail", query = "SELECT p FROM Proveedor p WHERE p.email = :email")})
 public class Proveedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,7 +66,7 @@ public class Proveedor implements Serializable {
     private String direccion;
     @Column(name = "EMAIL")
     private String email;
-    @OneToMany(mappedBy = "idProveedor")
+    @OneToMany(mappedBy = "idProveedor", fetch = FetchType.LAZY)
     private List<GastoEspontaneo> gastoEspontaneoList;
 
     public Proveedor() {
@@ -147,6 +161,7 @@ public class Proveedor implements Serializable {
         this.email = email;
     }
 
+    @XmlTransient
     public List<GastoEspontaneo> getGastoEspontaneoList() {
         return gastoEspontaneoList;
     }

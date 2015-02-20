@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,8 +27,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CLIENTE")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
+    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
+    @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
+    @NamedQuery(name = "Cliente.findByPrimerNombre", query = "SELECT c FROM Cliente c WHERE c.primerNombre = :primerNombre"),
+    @NamedQuery(name = "Cliente.findBySegundoNombre", query = "SELECT c FROM Cliente c WHERE c.segundoNombre = :segundoNombre"),
+    @NamedQuery(name = "Cliente.findByPrimerApellido", query = "SELECT c FROM Cliente c WHERE c.primerApellido = :primerApellido"),
+    @NamedQuery(name = "Cliente.findBySegundoApellido", query = "SELECT c FROM Cliente c WHERE c.segundoApellido = :segundoApellido"),
+    @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion"),
+    @NamedQuery(name = "Cliente.findByTelefono1", query = "SELECT c FROM Cliente c WHERE c.telefono1 = :telefono1"),
+    @NamedQuery(name = "Cliente.findByTelefono2", query = "SELECT c FROM Cliente c WHERE c.telefono2 = :telefono2"),
+    @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email"),
+    @NamedQuery(name = "Cliente.findByActivo", query = "SELECT c FROM Cliente c WHERE c.activo = :activo")})
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,7 +65,7 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "ACTIVO")
     private Boolean activo;
-    @OneToMany(mappedBy = "idCliente")
+    @OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY)
     private List<Factura> facturaList;
 
     public Cliente() {
@@ -141,6 +155,7 @@ public class Cliente implements Serializable {
         this.activo = activo;
     }
 
+    @XmlTransient
     public List<Factura> getFacturaList() {
         return facturaList;
     }

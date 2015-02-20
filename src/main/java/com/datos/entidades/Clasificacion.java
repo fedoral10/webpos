@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,8 +28,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CLASIFICACION")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Clasificacion.findAll", query = "SELECT c FROM Clasificacion c")})
+    @NamedQuery(name = "Clasificacion.findAll", query = "SELECT c FROM Clasificacion c"),
+    @NamedQuery(name = "Clasificacion.findByIdClasificacion", query = "SELECT c FROM Clasificacion c WHERE c.idClasificacion = :idClasificacion"),
+    @NamedQuery(name = "Clasificacion.findByNombre", query = "SELECT c FROM Clasificacion c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Clasificacion.findByDescripcion", query = "SELECT c FROM Clasificacion c WHERE c.descripcion = :descripcion")})
 public class Clasificacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +46,7 @@ public class Clasificacion implements Serializable {
     private String nombre;
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clasificacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clasificacion", fetch = FetchType.LAZY)
     private List<ArticuloClasificacion> articuloClasificacionList;
 
     public Clasificacion() {
@@ -78,6 +85,7 @@ public class Clasificacion implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<ArticuloClasificacion> getArticuloClasificacionList() {
         return articuloClasificacionList;
     }

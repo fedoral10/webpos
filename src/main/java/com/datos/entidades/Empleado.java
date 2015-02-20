@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,8 +31,20 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "EMPLEADO")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e")})
+    @NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e"),
+    @NamedQuery(name = "Empleado.findByIdEmpleado", query = "SELECT e FROM Empleado e WHERE e.idEmpleado = :idEmpleado"),
+    @NamedQuery(name = "Empleado.findByPrimerNombre", query = "SELECT e FROM Empleado e WHERE e.primerNombre = :primerNombre"),
+    @NamedQuery(name = "Empleado.findBySegundoNombre", query = "SELECT e FROM Empleado e WHERE e.segundoNombre = :segundoNombre"),
+    @NamedQuery(name = "Empleado.findByPrimerApellido", query = "SELECT e FROM Empleado e WHERE e.primerApellido = :primerApellido"),
+    @NamedQuery(name = "Empleado.findBySegundoApellido", query = "SELECT e FROM Empleado e WHERE e.segundoApellido = :segundoApellido"),
+    @NamedQuery(name = "Empleado.findByCedula", query = "SELECT e FROM Empleado e WHERE e.cedula = :cedula"),
+    @NamedQuery(name = "Empleado.findByFechaIngreso", query = "SELECT e FROM Empleado e WHERE e.fechaIngreso = :fechaIngreso"),
+    @NamedQuery(name = "Empleado.findByEstado", query = "SELECT e FROM Empleado e WHERE e.estado = :estado"),
+    @NamedQuery(name = "Empleado.findByFechaSalida", query = "SELECT e FROM Empleado e WHERE e.fechaSalida = :fechaSalida"),
+    @NamedQuery(name = "Empleado.findByObservaciones", query = "SELECT e FROM Empleado e WHERE e.observaciones = :observaciones"),
+    @NamedQuery(name = "Empleado.findBySalario", query = "SELECT e FROM Empleado e WHERE e.salario = :salario")})
 public class Empleado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,7 +75,7 @@ public class Empleado implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "SALARIO")
     private BigDecimal salario;
-    @OneToMany(mappedBy = "idEmpleado")
+    @OneToMany(mappedBy = "idEmpleado", fetch = FetchType.LAZY)
     private List<GastoEspontaneo> gastoEspontaneoList;
 
     public Empleado() {
@@ -158,6 +173,7 @@ public class Empleado implements Serializable {
         this.salario = salario;
     }
 
+    @XmlTransient
     public List<GastoEspontaneo> getGastoEspontaneoList() {
         return gastoEspontaneoList;
     }

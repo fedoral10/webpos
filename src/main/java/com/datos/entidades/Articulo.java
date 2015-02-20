@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,8 +28,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ARTICULO")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")})
+    @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a"),
+    @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.idArticulo = :idArticulo"),
+    @NamedQuery(name = "Articulo.findByDescripcion", query = "SELECT a FROM Articulo a WHERE a.descripcion = :descripcion"),
+    @NamedQuery(name = "Articulo.findByPuntoReorden", query = "SELECT a FROM Articulo a WHERE a.puntoReorden = :puntoReorden"),
+    @NamedQuery(name = "Articulo.findByExistenciaMinima", query = "SELECT a FROM Articulo a WHERE a.existenciaMinima = :existenciaMinima"),
+    @NamedQuery(name = "Articulo.findByCosto", query = "SELECT a FROM Articulo a WHERE a.costo = :costo")})
 public class Articulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,13 +54,13 @@ public class Articulo implements Serializable {
     @Basic(optional = false)
     @Column(name = "COSTO")
     private int costo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo", fetch = FetchType.LAZY)
     private List<ArticuloClasificacion> articuloClasificacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo", fetch = FetchType.LAZY)
     private List<ExistenciaBodega> existenciaBodegaList;
-    @OneToMany(mappedBy = "idArticulo")
+    @OneToMany(mappedBy = "idArticulo", fetch = FetchType.LAZY)
     private List<GastoEspontaneo> gastoEspontaneoList;
-    @OneToMany(mappedBy = "idArticulo")
+    @OneToMany(mappedBy = "idArticulo", fetch = FetchType.LAZY)
     private List<FacturaLinea> facturaLineaList;
 
     public Articulo() {
@@ -108,6 +117,7 @@ public class Articulo implements Serializable {
         this.costo = costo;
     }
 
+    @XmlTransient
     public List<ArticuloClasificacion> getArticuloClasificacionList() {
         return articuloClasificacionList;
     }
@@ -116,6 +126,7 @@ public class Articulo implements Serializable {
         this.articuloClasificacionList = articuloClasificacionList;
     }
 
+    @XmlTransient
     public List<ExistenciaBodega> getExistenciaBodegaList() {
         return existenciaBodegaList;
     }
@@ -124,6 +135,7 @@ public class Articulo implements Serializable {
         this.existenciaBodegaList = existenciaBodegaList;
     }
 
+    @XmlTransient
     public List<GastoEspontaneo> getGastoEspontaneoList() {
         return gastoEspontaneoList;
     }
@@ -132,6 +144,7 @@ public class Articulo implements Serializable {
         this.gastoEspontaneoList = gastoEspontaneoList;
     }
 
+    @XmlTransient
     public List<FacturaLinea> getFacturaLineaList() {
         return facturaLineaList;
     }

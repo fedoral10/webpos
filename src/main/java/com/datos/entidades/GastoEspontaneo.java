@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,8 +26,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "GASTO_ESPONTANEO")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GastoEspontaneo.findAll", query = "SELECT g FROM GastoEspontaneo g")})
+    @NamedQuery(name = "GastoEspontaneo.findAll", query = "SELECT g FROM GastoEspontaneo g"),
+    @NamedQuery(name = "GastoEspontaneo.findByIdGastoEspontaneo", query = "SELECT g FROM GastoEspontaneo g WHERE g.idGastoEspontaneo = :idGastoEspontaneo"),
+    @NamedQuery(name = "GastoEspontaneo.findByObservaciones", query = "SELECT g FROM GastoEspontaneo g WHERE g.observaciones = :observaciones")})
 public class GastoEspontaneo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,16 +41,16 @@ public class GastoEspontaneo implements Serializable {
     @Column(name = "OBSERVACIONES")
     private String observaciones;
     @JoinColumn(name = "ID_ARTICULO", referencedColumnName = "ID_ARTICULO")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Articulo idArticulo;
     @JoinColumn(name = "ID_EMPLEADO", referencedColumnName = "ID_EMPLEADO")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Empleado idEmpleado;
     @JoinColumn(name = "ID_PROVEEDOR", referencedColumnName = "ID_PROVEEDOR")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Proveedor idProveedor;
     @JoinColumn(name = "ID_TIPO_GASTO_ESPONTANEO", referencedColumnName = "ID_TIPO_GASTO_ESPONTANEO")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipoGastoEspontaneo idTipoGastoEspontaneo;
 
     public GastoEspontaneo() {

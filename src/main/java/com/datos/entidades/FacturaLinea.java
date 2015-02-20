@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,8 +27,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "FACTURA_LINEA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FacturaLinea.findAll", query = "SELECT f FROM FacturaLinea f")})
+    @NamedQuery(name = "FacturaLinea.findAll", query = "SELECT f FROM FacturaLinea f"),
+    @NamedQuery(name = "FacturaLinea.findByIdFacturaLinea", query = "SELECT f FROM FacturaLinea f WHERE f.idFacturaLinea = :idFacturaLinea"),
+    @NamedQuery(name = "FacturaLinea.findByLinea", query = "SELECT f FROM FacturaLinea f WHERE f.linea = :linea"),
+    @NamedQuery(name = "FacturaLinea.findByCantidad", query = "SELECT f FROM FacturaLinea f WHERE f.cantidad = :cantidad"),
+    @NamedQuery(name = "FacturaLinea.findByTotal", query = "SELECT f FROM FacturaLinea f WHERE f.total = :total"),
+    @NamedQuery(name = "FacturaLinea.findByPrecioUnitario", query = "SELECT f FROM FacturaLinea f WHERE f.precioUnitario = :precioUnitario"),
+    @NamedQuery(name = "FacturaLinea.findByIva", query = "SELECT f FROM FacturaLinea f WHERE f.iva = :iva")})
 public class FacturaLinea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,10 +55,10 @@ public class FacturaLinea implements Serializable {
     @Column(name = "IVA")
     private BigDecimal iva;
     @JoinColumn(name = "ID_ARTICULO", referencedColumnName = "ID_ARTICULO")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Articulo idArticulo;
     @JoinColumn(name = "ID_FACTURA", referencedColumnName = "ID_FACTURA")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Factura idFactura;
 
     public FacturaLinea() {

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,8 +33,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "FACTURA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")})
+    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
+    @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.idFactura = :idFactura"),
+    @NamedQuery(name = "Factura.findByFecha", query = "SELECT f FROM Factura f WHERE f.fecha = :fecha"),
+    @NamedQuery(name = "Factura.findByMontoTotal", query = "SELECT f FROM Factura f WHERE f.montoTotal = :montoTotal"),
+    @NamedQuery(name = "Factura.findByTotalIva", query = "SELECT f FROM Factura f WHERE f.totalIva = :totalIva"),
+    @NamedQuery(name = "Factura.findByTextoCliente", query = "SELECT f FROM Factura f WHERE f.textoCliente = :textoCliente")})
 public class Factura implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,12 +62,12 @@ public class Factura implements Serializable {
     @Column(name = "TEXTO_CLIENTE")
     private String textoCliente;
     @JoinColumn(name = "ID_CAJA", referencedColumnName = "ID_CAJA")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Caja idCaja;
     @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente idCliente;
-    @OneToMany(mappedBy = "idFactura")
+    @OneToMany(mappedBy = "idFactura", fetch = FetchType.LAZY)
     private List<FacturaLinea> facturaLineaList;
 
     public Factura() {
@@ -131,6 +140,7 @@ public class Factura implements Serializable {
         this.idCliente = idCliente;
     }
 
+    @XmlTransient
     public List<FacturaLinea> getFacturaLineaList() {
         return facturaLineaList;
     }

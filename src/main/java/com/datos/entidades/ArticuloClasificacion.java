@@ -8,11 +8,13 @@ package com.datos.entidades;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -20,17 +22,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ARTICULO_CLASIFICACION")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ArticuloClasificacion.findAll", query = "SELECT a FROM ArticuloClasificacion a")})
+    @NamedQuery(name = "ArticuloClasificacion.findAll", query = "SELECT a FROM ArticuloClasificacion a"),
+    @NamedQuery(name = "ArticuloClasificacion.findByIdArticuloClasificacion", query = "SELECT a FROM ArticuloClasificacion a WHERE a.articuloClasificacionPK.idArticuloClasificacion = :idArticuloClasificacion"),
+    @NamedQuery(name = "ArticuloClasificacion.findByIdClasificacion", query = "SELECT a FROM ArticuloClasificacion a WHERE a.articuloClasificacionPK.idClasificacion = :idClasificacion"),
+    @NamedQuery(name = "ArticuloClasificacion.findByIdArticulo", query = "SELECT a FROM ArticuloClasificacion a WHERE a.articuloClasificacionPK.idArticulo = :idArticulo")})
 public class ArticuloClasificacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ArticuloClasificacionPK articuloClasificacionPK;
     @JoinColumn(name = "ID_ARTICULO", referencedColumnName = "ID_ARTICULO", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Articulo articulo;
     @JoinColumn(name = "ID_CLASIFICACION", referencedColumnName = "ID_CLASIFICACION", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clasificacion clasificacion;
 
     public ArticuloClasificacion() {

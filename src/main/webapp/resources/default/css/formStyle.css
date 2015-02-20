@@ -6,11 +6,33 @@ border-style: none;
 */
 h1
 {
-color:orange;
-text-align:center;
+	color:#C6C6C6;
+	text-align:center;
 }
+
+body
+{
+	/*background-image: url("#{resource['default:bg/bg.png']}'");*/
+	background-image:url("#{request.contextPath}/resources/default/bg/bg.png");
+}
+
 .panelSinGrid tr, .panelSinGrid td {
     border: none;
     border-style: hidden;
     border-color: transparent;
+}
+
+.panelSinGrid
+{
+	font-size: 15px;
+	font-family: monospace;
+}
+
+.textoLargo
+{
+	width: 500px;
+}
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
 }

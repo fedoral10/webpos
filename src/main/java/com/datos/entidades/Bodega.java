@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,8 +28,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BODEGA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bodega.findAll", query = "SELECT b FROM Bodega b")})
+    @NamedQuery(name = "Bodega.findAll", query = "SELECT b FROM Bodega b"),
+    @NamedQuery(name = "Bodega.findByIdBodega", query = "SELECT b FROM Bodega b WHERE b.idBodega = :idBodega"),
+    @NamedQuery(name = "Bodega.findByNombre", query = "SELECT b FROM Bodega b WHERE b.nombre = :nombre"),
+    @NamedQuery(name = "Bodega.findByTelefono", query = "SELECT b FROM Bodega b WHERE b.telefono = :telefono"),
+    @NamedQuery(name = "Bodega.findByDireccion", query = "SELECT b FROM Bodega b WHERE b.direccion = :direccion")})
 public class Bodega implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,7 +48,7 @@ public class Bodega implements Serializable {
     private String telefono;
     @Column(name = "DIRECCION")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bodega")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bodega", fetch = FetchType.LAZY)
     private List<ExistenciaBodega> existenciaBodegaList;
 
     public Bodega() {
@@ -82,6 +90,7 @@ public class Bodega implements Serializable {
         this.direccion = direccion;
     }
 
+    @XmlTransient
     public List<ExistenciaBodega> getExistenciaBodegaList() {
         return existenciaBodegaList;
     }

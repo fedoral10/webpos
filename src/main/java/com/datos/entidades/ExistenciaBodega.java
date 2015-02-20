@@ -10,11 +10,13 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -22,8 +24,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "EXISTENCIA_BODEGA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ExistenciaBodega.findAll", query = "SELECT e FROM ExistenciaBodega e")})
+    @NamedQuery(name = "ExistenciaBodega.findAll", query = "SELECT e FROM ExistenciaBodega e"),
+    @NamedQuery(name = "ExistenciaBodega.findByIdExistenciaBodega", query = "SELECT e FROM ExistenciaBodega e WHERE e.existenciaBodegaPK.idExistenciaBodega = :idExistenciaBodega"),
+    @NamedQuery(name = "ExistenciaBodega.findByIdBodega", query = "SELECT e FROM ExistenciaBodega e WHERE e.existenciaBodegaPK.idBodega = :idBodega"),
+    @NamedQuery(name = "ExistenciaBodega.findByIdArticulo", query = "SELECT e FROM ExistenciaBodega e WHERE e.existenciaBodegaPK.idArticulo = :idArticulo"),
+    @NamedQuery(name = "ExistenciaBodega.findByCantidad", query = "SELECT e FROM ExistenciaBodega e WHERE e.cantidad = :cantidad"),
+    @NamedQuery(name = "ExistenciaBodega.findByCosto", query = "SELECT e FROM ExistenciaBodega e WHERE e.costo = :costo"),
+    @NamedQuery(name = "ExistenciaBodega.findByPrecioVenta", query = "SELECT e FROM ExistenciaBodega e WHERE e.precioVenta = :precioVenta")})
 public class ExistenciaBodega implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -36,10 +45,10 @@ public class ExistenciaBodega implements Serializable {
     @Column(name = "PRECIO_VENTA")
     private BigDecimal precioVenta;
     @JoinColumn(name = "ID_ARTICULO", referencedColumnName = "ID_ARTICULO", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Articulo articulo;
     @JoinColumn(name = "ID_BODEGA", referencedColumnName = "ID_BODEGA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Bodega bodega;
 
     public ExistenciaBodega() {

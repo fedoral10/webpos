@@ -8,33 +8,49 @@
 <h:head>
 	<!-- <link href="css/formStyle.css" rel="stylesheet" type="text/css"/> -->
 	<h:outputStylesheet library="default" name="css/formStyle.css" />
+	<h:outputStylesheet
+		name="webjars/font-awesome/4.3.0/css/font-awesome.css" />
 	<title>POS</title>
 </h:head>
 <h:body>
-	<h1>Agregar nuevo Cliente</h1>
-	
-	<!-- <h:form>
-		<p:inputText value="#{clientMB.nombre}"></p:inputText>
-		<p:commandButton action="#{clientMB.guardarClient()}"
-			value="crearCliente"></p:commandButton>
-	</h:form>
-	<h:form>
-		<h2>Database</h2>
-		<h:commandButton action="#{esquema.exportarEsquema()}" value="Crear Esquema"/>
-	</h:form> -->
-	<h:form>
-	<p:panelGrid columns="2" cellpadding="10" styleClass="panelSinGrid">
-		<p:outputLabel for="txtPrimerNombre" value="Primer Nombre"/><p:inputText id="txtPrimerNombre" value="#{clienteMB.primerNombre}"></p:inputText>
-		<p:outputLabel for="txtSegundoNombre" value="Segundo Nombre"/><p:inputText id="txtSegundoNombre" value="#{clienteMB.segundoNombre}"></p:inputText>
-		<p:outputLabel for="txtPrimerApellido" value="Primer Apellido"/><p:inputText id="txtPrimerApellido" value="#{clienteMB.primerApellido}"></p:inputText>
-		<p:outputLabel for="txtSegundoApellido" value="SegundoApellido"/><p:inputText id="txtSegundoApellido" value="#{clienteMB.segundoApellido}"></p:inputText>
-		<p:outputLabel for="txtDireccion" value="Dirección"/><p:inputText id="txtDireccion" value="#{clienteMB.direccion}"></p:inputText>
-		<p:outputLabel for="txtTelefono1" value="Teléfono 1"/><p:inputText id="txtTelefono1" value="#{clienteMB.telefono1}"></p:inputText>
-		<p:outputLabel for="txtTelefono2" value="Teléfono 2"/><p:inputText id="txtTelefono2" value="#{clienteMB.telefono2}"></p:inputText>
-		<p:outputLabel for="txtEmail" value="Email"/><p:inputText id="txtEmail" value="#{clienteMB.email}"></p:inputText>
-		<p:outputLabel for="chkActivo" value="Activo"/><p:selectBooleanCheckbox id="chkActivo" value="#{clienteMB.activo}" ></p:selectBooleanCheckbox>
-		</p:panelGrid>
-		<p:commandButton action="#{clienteMB.guardarCliente()}" value="Boton"></p:commandButton>
-	</h:form>
+	<div align="center">
+		<h1>Main</h1>
+	</div>
+	<div align="center">
+		<h:form>
+			<p:menu toggleable="true">
+				<p:submenu label="Facturacion">
+					<p:menuitem value="Facturacion POS" url="#" icon="ui-icon-home" />
+				</p:submenu>
+				<p:submenu label="Clientes">
+					<p:menuitem value="Nuevo Cliente"
+						url="entidades/cliente/iCliente.jsf" icon="fa fa-plus" />
+					<p:menuitem value="Catalogo" url="#" icon="fa fa-list" />
+					<p:menuitem value="Reporte" url="#" icon="fa fa-print" />
+				</p:submenu>
+				<p:submenu label="Proveedores">
+					<p:menuitem value="Nuevo Prueveedor" url="#" icon="fa fa-plus" />
+					<p:menuitem value="Catalogo" url="#" icon="fa fa-list" />
+					<p:menuitem value="Reporte" url="#" icon="fa fa-print" />
+				</p:submenu>
+				<p:submenu label="Inventario">
+					<p:submenu label="Articulo">
+						<p:menuitem value="Nuevo Articulo" url="#" icon="fa fa-plus" />
+						<p:menuitem value="Calalogo" url="#" icon="fa fa-list" />
+					</p:submenu>
+					<p:submenu label="Bodega">
+						<p:menuitem value="Nuevo Bodega" url="#" icon="fa fa-plus" />
+						<p:menuitem value="Catalogo" url="#" icon="fa fa-list" />
+					</p:submenu>
+					<p:menuitem value="Catalogo" url="#" icon="fa fa-list" />
+				</p:submenu>
+				<p:submenu label="Reportes">
+					<p:menuitem value="Reporte Ventas" url="#" icon="fa fa-print" />
+				</p:submenu>
+			</p:menu>
+
+			<!--<p:commandButton action="#" value="Agregar Cliente"></p:commandButton>-->
+		</h:form>
+	</div>
 </h:body>
 </html>

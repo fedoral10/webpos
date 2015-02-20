@@ -32,7 +32,7 @@
 		
 		<mapping class="com.datos.entidades.Empleado"/>
 		<mapping class="com.datos.entidades.ExistenciaBodega"/>
-		
+		<mapping class="com.datos.entidades.CierreCaja"/>
 		
 		<mapping class="com.datos.entidades.GastoEspontaneo"/>
 		<mapping class="com.datos.entidades.Proveedor"/>

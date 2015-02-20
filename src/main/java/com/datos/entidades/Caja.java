@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,8 +27,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CAJA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c")})
+    @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c"),
+    @NamedQuery(name = "Caja.findByIdCaja", query = "SELECT c FROM Caja c WHERE c.idCaja = :idCaja"),
+    @NamedQuery(name = "Caja.findByDescripcion", query = "SELECT c FROM Caja c WHERE c.descripcion = :descripcion"),
+    @NamedQuery(name = "Caja.findByAbierta", query = "SELECT c FROM Caja c WHERE c.abierta = :abierta")})
 public class Caja implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,10 +44,10 @@ public class Caja implements Serializable {
     private String descripcion;
     @Column(name = "ABIERTA")
     private Boolean abierta;
-    @OneToMany(mappedBy = "idCaja")
-    private List<DetalleCierreCaja> detalleCierreCajaList;
-    @OneToMany(mappedBy = "idCaja")
+    @OneToMany(mappedBy = "idCaja", fetch = FetchType.LAZY)
     private List<Factura> facturaList;
+    @OneToMany(mappedBy = "idCaja", fetch = FetchType.LAZY)
+    private List<CierreCaja> cierreCajaList;
 
     public Caja() {
     }
@@ -73,20 +80,22 @@ public class Caja implements Serializable {
         this.abierta = abierta;
     }
 
-    public List<DetalleCierreCaja> getDetalleCierreCajaList() {
-        return detalleCierreCajaList;
-    }
-
-    public void setDetalleCierreCajaList(List<DetalleCierreCaja> detalleCierreCajaList) {
-        this.detalleCierreCajaList = detalleCierreCajaList;
-    }
-
+    @XmlTransient
     public List<Factura> getFacturaList() {
         return facturaList;
     }
 
     public void setFacturaList(List<Factura> facturaList) {
         this.facturaList = facturaList;
+    }
+
+    @XmlTransient
+    public List<CierreCaja> getCierreCajaList() {
+        return cierreCajaList;
+    }
+
+    public void setCierreCajaList(List<CierreCaja> cierreCajaList) {
+        this.cierreCajaList = cierreCajaList;
     }
 
     @Override

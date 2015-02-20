@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,8 +27,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TIPO_GASTO_ESPONTANEO")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TipoGastoEspontaneo.findAll", query = "SELECT t FROM TipoGastoEspontaneo t")})
+    @NamedQuery(name = "TipoGastoEspontaneo.findAll", query = "SELECT t FROM TipoGastoEspontaneo t"),
+    @NamedQuery(name = "TipoGastoEspontaneo.findByIdTipoGastoEspontaneo", query = "SELECT t FROM TipoGastoEspontaneo t WHERE t.idTipoGastoEspontaneo = :idTipoGastoEspontaneo"),
+    @NamedQuery(name = "TipoGastoEspontaneo.findByDescripcion", query = "SELECT t FROM TipoGastoEspontaneo t WHERE t.descripcion = :descripcion")})
 public class TipoGastoEspontaneo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,7 +42,7 @@ public class TipoGastoEspontaneo implements Serializable {
     @Basic(optional = false)
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(mappedBy = "idTipoGastoEspontaneo")
+    @OneToMany(mappedBy = "idTipoGastoEspontaneo", fetch = FetchType.LAZY)
     private List<GastoEspontaneo> gastoEspontaneoList;
 
     public TipoGastoEspontaneo() {
@@ -67,6 +73,7 @@ public class TipoGastoEspontaneo implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<GastoEspontaneo> getGastoEspontaneoList() {
         return gastoEspontaneoList;
     }

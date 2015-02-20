@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<!-- <link href="css/formStyle.css" rel="stylesheet" type="text/css"/> -->
+	<h:outputStylesheet library="default" name="css/formStyle.css" />
+	<h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
+	<title>POS</title>
+</h:head>
+<h:body>
+	<div align="center"><h1>Agregar nuevo Cliente</h1></div>
+	
+	<!-- <h:form>
+		<p:inputText value="#{clientMB.nombre}"></p:inputText>
+		<p:commandButton action="#{clientMB.guardarClient()}"
+			value="crearCliente"></p:commandButton>
+	</h:form>
+	<h:form>
+		<h2>Database</h2>
+		<h:commandButton action="#{esquema.exportarEsquema()}" value="Crear Esquema"/>
+	</h:form> -->
+	<div align="center">
+		<h:form>
+		<p:panelGrid columns="2" cellpadding="10" styleClass="panelSinGrid"> 
+			<p:outputLabel for="txtPrimerNombre" value="Primer Nombre" /><p:inputText styleClass="textoLargo" id="txtPrimerNombre" value="#{clienteMB.primerNombre}"></p:inputText>
+			<p:outputLabel for="txtSegundoNombre" value="Segundo Nombre"/><p:inputText id="txtSegundoNombre" value="#{clienteMB.segundoNombre}"></p:inputText>
+			<p:outputLabel for="txtPrimerApellido" value="Primer Apellido"/><p:inputText id="txtPrimerApellido" value="#{clienteMB.primerApellido}"></p:inputText>
+			<p:outputLabel for="txtSegundoApellido" value="Segundo Apellido"/><p:inputText id="txtSegundoApellido" value="#{clienteMB.segundoApellido}"></p:inputText>
+			<p:outputLabel for="txtDireccion" value="Dirección"/><p:inputTextarea rows="5" cols="30" id="txtDireccion" value="#{clienteMB.direccion}"></p:inputTextarea>
+			<p:outputLabel for="txtTelefono1" value="Teléfono 1"/><p:inputText id="txtTelefono1" value="#{clienteMB.telefono1}"></p:inputText>
+			<p:outputLabel for="txtTelefono2" value="Teléfono 2"/><p:inputText id="txtTelefono2" value="#{clienteMB.telefono2}"></p:inputText>
+			<p:outputLabel for="txtEmail" value="Email"/><p:inputText id="txtEmail" value="#{clienteMB.email}"></p:inputText>
+			<p:outputLabel for="chkActivo" value="Activo"/><p:selectBooleanCheckbox id="chkActivo" value="#{clienteMB.activo}" ></p:selectBooleanCheckbox>
+		</p:panelGrid>
+			<p:commandButton action="#{clienteMB.guardarCliente()}" value="Guardar"></p:commandButton>
+		</h:form>
+	</div>
+</h:body>
+</html>

@@ -16,7 +16,11 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class ExistenciaBodegaPK implements Serializable {
-    @Basic(optional = false)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Basic(optional = false)
     @Column(name = "ID_EXISTENCIA_BODEGA")
     private long idExistenciaBodega;
     @Basic(optional = false)

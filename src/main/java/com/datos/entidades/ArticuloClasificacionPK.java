@@ -16,7 +16,11 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class ArticuloClasificacionPK implements Serializable {
-    @Basic(optional = false)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Basic(optional = false)
     @Column(name = "ID_ARTICULO_CLASIFICACION")
     private long idArticuloClasificacion;
     @Basic(optional = false)

@@ -49,11 +49,13 @@ public class Articulo implements Serializable {
     @Column(name = "PUNTO_REORDEN")
     private Integer puntoReorden;
     @Basic(optional = false)
-    @Column(name = "EXISTENCIA_MINIMA")
+    @Column(name = "EXISTENCIA_MINIMA")    
     private int existenciaMinima;
     @Basic(optional = false)
     @Column(name = "COSTO")
-    private int costo;
+    private float costo;
+    @Column(name = "CODIGO_BARRA")
+    private String codigoBarra;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo", fetch = FetchType.LAZY)
     private List<ArticuloClasificacion> articuloClasificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo", fetch = FetchType.LAZY)
@@ -109,15 +111,23 @@ public class Articulo implements Serializable {
         this.existenciaMinima = existenciaMinima;
     }
 
-    public int getCosto() {
+    public float getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(float costo) {
         this.costo = costo;
     }
 
-    @XmlTransient
+    public String getCodigoBarra() {
+		return codigoBarra;
+	}
+
+	public void setCodigoBarra(String codigoBarra) {
+		this.codigoBarra = codigoBarra;
+	}
+
+	@XmlTransient
     public List<ArticuloClasificacion> getArticuloClasificacionList() {
         return articuloClasificacionList;
     }

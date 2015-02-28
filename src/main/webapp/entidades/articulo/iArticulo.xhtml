@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="default" name="css/formStyle.css" />
+	<h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
+	<title>POS</title>
+</h:head>
+<h:body>
+	<div align="center"><h1>Nuevo Articulo</h1></div>
+
+	<div align="center">
+		<h:form>
+		<p:panelGrid columns="2" cellpadding="10" styleClass="panelSinGrid"> 
+			<p:outputLabel for="txtcodigoBarra" value="Codigo Barra"/><p:inputText id="txtcodigoBarra" value="#{articuloMB.codigoBarra}"></p:inputText>
+			<p:outputLabel for="txtdescripcion" value="Descripcion"/><p:inputText  styleClass="textoLargo" id="txtdescripcion" value="#{articuloMB.descripcion}"></p:inputText>
+			<p:outputLabel for="txtcosto" value="Costo"/><p:inputText id="txtcosto" value="#{articuloMB.costo}"></p:inputText>
+			<p:outputLabel for="txtpuntoReorden" value="Punto Reorden"/><p:inputText id="txtpuntoReorden" value="#{articuloMB.puntoReorden}"></p:inputText>
+		</p:panelGrid>
+			<p:commandButton action="#{articuloMB.guardarArticulo()}" value="Guardar"></p:commandButton>
+		</h:form>
+	</div>
+</h:body>
+</html>

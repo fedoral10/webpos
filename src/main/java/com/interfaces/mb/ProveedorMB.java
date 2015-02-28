@@ -1,11 +1,10 @@
 package com.interfaces.mb;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.faces.bean.ManagedBean;
 
 import com.datos.entidades.Proveedor;
 import com.datos.util.HibernateUtil;
-
+@ManagedBean
 public class ProveedorMB {
     
     private String razonSocial;
@@ -26,7 +25,71 @@ public class ProveedorMB {
     
     private String email;
     
-    public void guardarProveedor()
+    public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getPrimerNombre() {
+		return primerNombre;
+	}
+
+	public void setPrimerNombre(String primerNombre) {
+		this.primerNombre = primerNombre;
+	}
+
+	public String getSegundoNombre() {
+		return segundoNombre;
+	}
+
+	public void setSegundoNombre(String segundoNombre) {
+		this.segundoNombre = segundoNombre;
+	}
+
+	public String getPrimerApellido() {
+		return primerApellido;
+	}
+
+	public void setPrimerApellido(String primerApellido) {
+		this.primerApellido = primerApellido;
+	}
+
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
+
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
+
+	public String getTelefono1() {
+		return telefono1;
+	}
+
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void guardarProveedor()
     {
     	Proveedor prov = new Proveedor();
     	prov.setRazonSocial(this.razonSocial);

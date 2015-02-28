@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<!-- <link href="css/formStyle.css" rel="stylesheet" type="text/css"/> -->
+	<h:outputStylesheet library="default" name="css/formStyle.css" />
+	<h:outputStylesheet
+		name="webjars/font-awesome/4.3.0/css/font-awesome.css" />
+	<title>POS</title>
+</h:head>
+<body>
+	<p:panelGrid>
+		<p:row>
+			<p:column colspan="7" ><div align="center">PUNTO DE VENTA</div></p:column>
+		</p:row>
+		<p:row>
+			<p:column colspan="7">
+				<p:outputLabel for="txtCliente" value="Cliente: "/>
+				<p:inputText id="txtCliente" value=""></p:inputText>
+				<p:inputText id="txtClienteDesc" value="" styleClass="textoLargo"></p:inputText>
+			</p:column>
+		</p:row>
+		<p:row>
+			<p:column colspan="7">
+				<p:outputLabel for="txtArticulo" value="Articulo: "/>
+				<p:inputText id="txtArticulo" value=""></p:inputText>
+				<p:inputText id="txtArticuloDesc" value="" styleClass="textoLargo"></p:inputText>
+			</p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="7">
+				<p:dataTable id="eventsDT" var="car" value="" selectionMode="single" rowKey="">
+			        
+			        <p:ajax event="rowSelect"/>
+			        <p:ajax event="rowUnselect" />
+			        <p:column headerText="Codigo">
+			            <h:outputText value="#" />
+			        </p:column>
+			        <p:column headerText="Descripción">
+			            <h:outputText value="#" />
+			        </p:column>
+			        <p:column headerText="Cantidad">
+			            <h:outputText value="#" />
+			        </p:column>
+			        <p:column headerText="Precio unitario">
+			            <h:outputText value="#" />
+			        </p:column>
+			        <p:column headerText="Total">
+			            <h:outputText value="#" />
+			        </p:column>
+			    </p:dataTable>
+		    </p:column>
+		</p:row>
+
+		<p:row>
+			<p:column colspan="5">
+				<p:row>
+					<p:column colspan="1"><p:commandButton action="#" value="1" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="2" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="3" /></p:column>
+					<p:column><div align="center"><p:commandButton action="#" value="Accion Nueva" /></div></p:column>
+					<p:column><div align="right"><p:outputLabel for="txtTotal" value="Total:"/><p:inputText id="txtTotal" value="0.00"></p:inputText></div></p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="1"><p:commandButton action="#" value="4" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="5" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="6" /></p:column>
+					<p:column><div align="center"><p:commandButton action="#" value="Guardar" /></div></p:column>
+					<p:column></p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="1"><p:commandButton action="#" value="7" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="8" /></p:column>
+					<p:column colspan="1"><p:commandButton action="#" value="9" /></p:column>
+					<p:column></p:column>
+					<p:column><div align="center"><p:commandButton action="#" value="Guardar/Imprimir" /></div></p:column>
+				</p:row>
+				
+			</p:column>
+				<!-- Fin Botones Rapidos-->
+
+		</p:row>
+
+	</p:panelGrid>
+</body>
+</html>

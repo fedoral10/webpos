@@ -98,7 +98,6 @@ public class bcn {
 		soapBody.setPrefix("soap");
 
 		SOAPElement RecuperaTC_Mes = soapBody.addChildElement("RecuperaTC_Dia","","http://servicios.bcn.gob.ni/");
-		//RecuperaTC_Mes.addAttribute(envelope.createName("xmlns"), "http://servicios.bcn.gob.ni/");
 		
 		SOAPElement nAnio = RecuperaTC_Mes.addChildElement("Ano");
 		nAnio.addTextNode(Integer.toString(Anio));
